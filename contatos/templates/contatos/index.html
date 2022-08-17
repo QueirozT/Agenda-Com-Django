@@ -20,7 +20,9 @@
         <tr>
           <td>{{ contato.id }}</td>
           <td>
-            <a href="{% url 'detalhes' contato_id=contato.id %}">{{ contato.nome }}</a>
+            <a href="{% url 'detalhes' contato_id=contato.id %}">
+              {{ contato.nome }}
+            </a>
           </td>
           <td>{{ contato.sobrenome }}</td>
           <td>{{ contato.telefone }}</td>
@@ -36,11 +38,17 @@
       {% for pagina in contatos.paginator.page_range %}
         {% if contatos.number == pagina %}
           <li class="page-item active">
-            <a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a>
+            <a class="page-link" 
+              href="?p={{ pagina }}&termo={{ request.GET.termo }}">
+              {{ pagina }}
+            </a>
           </li>
         {% else %}
           <li class="page-item">
-            <a class="page-link" href="?p={{ pagina }}">{{ pagina }}</a>
+            <a class="page-link" 
+              href="?p={{ pagina }}&termo={{ request.GET.termo }}">
+              {{ pagina }}
+            </a>
           </li>
         {% endif %}
       {% endfor %}
