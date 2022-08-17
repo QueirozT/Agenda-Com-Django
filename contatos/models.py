@@ -18,5 +18,7 @@ class Contato(models.Model):
 
     categoria = models.ForeignKey(Categoria, on_delete=models.DO_NOTHING)
 
+    mostrar = models.BooleanField(default=True)
+
     def __str__(self):
         return f'{self.nome} {self.sobrenome}'
