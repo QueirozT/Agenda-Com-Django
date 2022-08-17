@@ -12,11 +12,6 @@ class ContatoAdmin(admin.ModelAdmin):
     list_select_related = ('categoria',)
     date_hierarchy = 'data_criacao'
     ordering = ('-data_criacao',)
-    fieldsets = (
-        (None, {
-            'fields': ('nome', 'sobrenome', 'telefone', 'email', 'descricao', 'categoria')
-        }),
-    )
     list_editable = ('telefone', 'mostrar')
 
 
