@@ -7,6 +7,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>ID</th>
         <th>Nome</th>
         <th>Sobrenome</th>
         <th>Telefone</th>
@@ -16,16 +17,15 @@
     <tbody>
 
       {% for contato in contatos %}
-        {% if contato.mostrar %}
-          <tr>
-            <td>
-              <a href="{% url 'detalhes' contato_id=contato.id %}">{{ contato.nome }}</a>
-            </td>
-            <td>{{ contato.sobrenome }}</td>
-            <td>{{ contato.telefone }}</td>
-            <td>{{ contato.categoria }}</td>
-          </tr>
-        {% endif %}
+        <tr>
+          <td>{{ contato.id }}</td>
+          <td>
+            <a href="{% url 'detalhes' contato_id=contato.id %}">{{ contato.nome }}</a>
+          </td>
+          <td>{{ contato.sobrenome }}</td>
+          <td>{{ contato.telefone }}</td>
+          <td>{{ contato.categoria }}</td>
+        </tr>
       {% endfor %}
 
     </tbody>
