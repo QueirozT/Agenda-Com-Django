@@ -20,5 +20,7 @@ class Contato(models.Model):
 
     mostrar = models.BooleanField(default=True)
 
+    foto = models.ImageField(blank=True, upload_to='fotos/%Y/%m/')
+
     def __str__(self):
         return f'{self.nome} {self.sobrenome}'
