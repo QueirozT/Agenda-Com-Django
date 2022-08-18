@@ -1,15 +1,36 @@
-from django.contrib import messages
+from django.contrib import auth, messages
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.shortcuts import redirect, render
+from django.contrib.auth.decorators import login_required
 
 
 def login(request):
-    return render(request, 'accounts/login.html')
+    if request.method != 'POST':
+        return render(request, 'accounts/login.html')
 
+    usuario = request.POST.get('usuario')
+    senha = request.POST.get('senha')
+
+    if User.objects.filter(email=usuario).exists():
+        usuario = User.objects.filter(email=usuario).first().username
+        # usuario = User.objects.filter(email=usuario).get().username
+
+    user = auth.authenticate(username=usuario, password=senha)
+        
+    if not user:
+        messages.error(request, 'Usuário ou senha inválidos.')
+        return render(request, 'accounts/login.html')
+    else:
+        auth.login(request, user)
+        messages.success(request, 'Logado com sucesso!')
+        return redirect('dashboard')
+    
 
 def logout(request):
-    return render(request, 'accounts/logout.html')
+    auth.logout(request)
+    messages.info(request, 'Sua sessão foi finalizada com sucesso!')
+    return redirect('login')
 
 
 def register(request):
@@ -55,13 +76,11 @@ def register(request):
         return render(request, 'accounts/register.html')
 
     messages.add_message(request, messages.SUCCESS, 'Cadastrado com sucesso!')
-    
     user = User.objects.create_user(username=usuario, email=email, password=senha, first_name=nome, last_name=sobrenome)
-    
     user.save()
-    
     return redirect('login')
 
 
+@login_required(redirect_field_name='login')
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
