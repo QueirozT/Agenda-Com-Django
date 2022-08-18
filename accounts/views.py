@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
-
+from .models import ContatoForm
 
 def login(request):
     if request.method != 'POST':
@@ -83,4 +83,17 @@ def register(request):
 
 @login_required(redirect_field_name='login')
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html')
+    if request.method != 'POST':
+        form = ContatoForm
+        return render(request, 'accounts/dashboard.html', {'form': form})
+
+    form = ContatoForm(request.POST, request.FILES)
+
+    if not form.is_valid():
+        messages.error(request, 'Erro ao cadastrar contato.')
+        form = ContatoForm(request.POST)
+        return render(request, 'accounts/dashboard.html', {'form': form})
+
+    form.save()
+    messages.success(request, f'Contato {request.POST.get("nome")} cadastrado com sucesso!')
+    return redirect('dashboard')
