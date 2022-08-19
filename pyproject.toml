@@ -12,10 +12,10 @@ django-simple-captcha = "^0.5.17"
 gunicorn = "^20.1.0"
 whitenoise = "^6.2.0"
 dj-database-url = "^1.0.0"
+psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
-psycopg2-binary = "^2.9.3"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
