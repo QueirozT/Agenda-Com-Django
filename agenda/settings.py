@@ -22,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# UMA NOVA SECRET_KEY FOI GERADA NO local_settings.py
 SECRET_KEY = 'django-insecure-pg=i^ll(m)rf0)c1op=dd1s1-9%(@zjro1$=+n9*mbdhna9wfi'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -42,6 +43,7 @@ INSTALLED_APPS = [
     'contatos.apps.ContatosConfig', # Registrando o app Contatos
     'accounts.apps.AccountsConfig',
     'captcha',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 ROOT_URLCONF = 'agenda.urls'
@@ -120,6 +123,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     Path.joinpath(BASE_DIR, 'templates/static'), # Registrando os static files
@@ -145,3 +150,8 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert-success',
     constants.DEBUG: 'alert-info',
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
