@@ -154,7 +154,7 @@ dev = ["tox", "pre-commit"]
 name = "psycopg2-binary"
 version = "2.9.3"
 description = "psycopg2 - Python-PostgreSQL Database Adapter"
-category = "dev"
+category = "main"
 optional = false
 python-versions = ">=3.6"
 
@@ -237,7 +237,7 @@ brotli = ["brotli"]
 [metadata]
 lock-version = "1.1"
 python-versions = "3.10.6"
-content-hash = "da2da9042609756425056ca34c4bb0944f9f41fa79627175e8502f59e29bc181"
+content-hash = "e52b63a3d6b1c46ec8cad3fec4b0c71fcc077f3e6e7ca7e73e9aeb2649d66b95"
 
 [metadata.files]
 asgiref = [
