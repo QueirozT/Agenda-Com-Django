@@ -8,6 +8,7 @@ authors = ["Thi <tiagoqueirozgoncalves100@gmail.com>"]
 python = "^3.10"
 Django = "^4.1"
 Pillow = "^9.2.0"
+django-simple-captcha = "^0.5.17"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
