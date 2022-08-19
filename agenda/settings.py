@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'contatos.apps.ContatosConfig', # Registrando o app Contatos
     'accounts.apps.AccountsConfig',
+    'captcha',
 ]
 
 MIDDLEWARE = [
