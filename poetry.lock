@@ -57,6 +57,33 @@ bcrypt = ["bcrypt"]
 argon2 = ["argon2-cffi (>=19.1.0)"]
 
 [[package]]
+name = "django-ranged-response"
+version = "0.2.0"
+description = "Modified Django FileResponse that adds Content-Range headers."
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+django = "*"
+
+[[package]]
+name = "django-simple-captcha"
+version = "0.5.17"
+description = "A very simple, yet powerful, Django captcha application"
+category = "main"
+optional = false
+python-versions = "*"
+
+[package.dependencies]
+Django = ">=2.2"
+django-ranged-response = "0.2.0"
+Pillow = ">=6.2.0"
+
+[package.extras]
+test = ["testfixtures"]
+
+[[package]]
 name = "more-itertools"
 version = "8.14.0"
 description = "More routines for operating on iterables, beyond itertools"
@@ -166,7 +193,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "c7674afbf2a9ade78fd2234f9224db2257f786597658af270d4dbbbd753b699f"
+content-hash = "f0abc50df3c4b37f9b7c6567ae46b276caad11f1e70e776fef64fff59cc8f2bc"
 
 [metadata.files]
 asgiref = [
@@ -187,6 +214,13 @@ colorama = [
 django = [
     {file = "Django-4.1-py3-none-any.whl", hash = "sha256:031ccb717782f6af83a0063a1957686e87cb4581ea61b47b3e9addf60687989a"},
     {file = "Django-4.1.tar.gz", hash = "sha256:032f8a6fc7cf05ccd1214e4a2e21dfcd6a23b9d575c6573cacc8c67828dbe642"},
+]
+django-ranged-response = [
+    {file = "django-ranged-response-0.2.0.tar.gz", hash = "sha256:f71fff352a37316b9bead717fc76e4ddd6c9b99c4680cdf4783b9755af1cf985"},
+]
+django-simple-captcha = [
+    {file = "django-simple-captcha-0.5.17.tar.gz", hash = "sha256:9649e66dab4e71efacbfef02f48b83b91684898352a1ab56f1686ce71033b328"},
+    {file = "django_simple_captcha-0.5.17-py2.py3-none-any.whl", hash = "sha256:f9a07e5e9de264ba4039c9eaad66bc48188a21ceda5fcdc2fa13c5512141c2c9"},
 ]
 more-itertools = [
     {file = "more-itertools-8.14.0.tar.gz", hash = "sha256:c09443cd3d5438b8dafccd867a6bc1cb0894389e90cb53d227456b0b0bccb750"},
