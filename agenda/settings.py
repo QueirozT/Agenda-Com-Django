@@ -10,7 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+from decouple import config
 from django.contrib.messages import constants
+import dj_database_url
 from pathlib import Path
 
 
@@ -22,13 +24,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# UMA NOVA SECRET_KEY FOI GERADA NO local_settings.py
-SECRET_KEY = 'django-insecure-pg=i^ll(m)rf0)c1op=dd1s1-9%(@zjro1$=+n9*mbdhna9wfi'
+SECRET_KEY = config(
+    'SECRET_KEY', 
+    default='django-insecure-pg=i^ll(m)rf0)c1op=dd1s1-9%(@zjro1$=+n9*mbdhna9wfi'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config(
+    'DEBUG', 
+    cast=bool, 
+    default=True
+)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config(
+    'ALLOWED_HOSTS', 
+    cast=lambda v: [s.strip() for s in v.split(',')], 
+    default=''
+)
 
 
 # Application definition
@@ -83,10 +95,17 @@ WSGI_APPLICATION = 'agenda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': config('DB_ENGINE', default='django.db.backends.sqlite3'),
+        'NAME': config('DB_NAME', default=BASE_DIR / 'db.sqlite3'),
+        'USER': config('DB_USER', default=''),
+        'PASSWORD': config('DB_PASSWORD', default=''),
+        'HOST': config('DB_HOST', default=''),
+        'PORT': config('DB_PORT', default=''),
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -111,9 +130,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = 'pt-BR'
+LANGUAGE_CODE = config('LANGUAGE', default='pt-BR')
 
-TIME_ZONE = 'America/Sao_Paulo'
+TIME_ZONE = config('TIME_ZONE', default='UTC')
 
 USE_I18N = True
 
@@ -123,7 +142,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
@@ -133,6 +153,7 @@ STATIC_ROOT = Path.joinpath(BASE_DIR, 'static')
 
 MEDIA_ROOT = Path.joinpath(BASE_DIR, 'media')
 MEDIA_URL = 'media/'
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -150,8 +171,3 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert-success',
     constants.DEBUG: 'alert-info',
 }
-
-try:
-    from .local_settings import *
-except ImportError:
-    pass
