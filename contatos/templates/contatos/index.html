@@ -7,7 +7,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
         <th>Nome</th>
         <th>Sobrenome</th>
         <th>Telefone</th>
@@ -18,7 +17,6 @@
 
       {% for contato in contatos %}
         <tr>
-          <td>{{ contato.id }}</td>
           <td>
             <a href="{% url 'detalhes' contato_id=contato.id %}">
               {{ contato.nome }}
