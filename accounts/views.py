@@ -1,9 +1,11 @@
 from django.contrib import auth, messages
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.validators import validate_email
 from django.shortcuts import redirect, render
-from django.contrib.auth.decorators import login_required
+
 from .models import ContatoForm
+
 
 def login(request):
     if request.method != 'POST':
