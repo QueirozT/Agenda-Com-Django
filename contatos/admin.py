@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Contato, Categoria
+
+from .models import Categoria, Contato
 
 
 class ContatoAdmin(admin.ModelAdmin):
