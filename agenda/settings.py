@@ -39,7 +39,7 @@ DEBUG = config(
 ALLOWED_HOSTS = config(
     'ALLOWED_HOSTS', 
     cast=lambda v: [s.strip() for s in v.split(',')], 
-    default=''
+    default='*'
 )
 
 
@@ -82,6 +82,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
