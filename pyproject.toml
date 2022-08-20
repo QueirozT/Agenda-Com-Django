@@ -16,7 +16,7 @@ psycopg2-binary = "^2.9.3"
 python-decouple = "^3.6"
 
 [tool.poetry.dev-dependencies]
-pytest = "^5.2"
+pytest = "^7.1.2"
 safety = "^2.1.1"
 isort = "^5.10.1"
 
