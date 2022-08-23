@@ -173,3 +173,15 @@ MESSAGE_TAGS = {
     constants.SUCCESS: 'alert-success',
     constants.DEBUG: 'alert-info',
 }
+
+
+# Configurando o sistema de storage da aws no django
+
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID', default='')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY', default='')
+
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME', default='')
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
